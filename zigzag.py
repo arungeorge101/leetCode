@@ -1,29 +1,22 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        i = 0
-        j = 0
-        col = int(len(s) / numRows)
-        rows = numRows
-        strArray = []
-        strArray = ["" for x in range(rows)]
-        k = rows - 1
-        returnString = ""
-
-        print("rows =  " + str(rows))
-        print("cols =  " + str(col))
-
-        for i in range(col):
-            strArray[0] = strArray[0] + s[j]
-            j = j + rows + (rows-2)
-            
-            if(k < len(s)):
-                strArray[rows-1] = strArray[rows-1] + s[k]
-                k = k + rows + (rows-2)
-
-        for x in range(rows):
-            returnString += strArray[x]
-        return returnString
+        if(numRows  < 2):
+            return s
+        arr = ['' for i in range(numRows)]
+        direction = 'down'
+        row = 0
+        for i in s:
+            arr[row] += i
+            if row == numRows-1:
+                direction = 'up'
+            elif row == 0:
+                direction = 'down'
+            if(direction == 'down'):
+                row += 1
+            else:
+                row -= 1
+        return(''.join(arr))
 
 if __name__ == "__main__":
     s = Solution()
-    print(s.convert("paypalishiring",3))
+    print(s.convert("paypalishiring",2))
